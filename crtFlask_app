@@ -1,0 +1,48 @@
+#!/bin/bash
+
+base_dir=$(pwd)
+FILES_SET=${app,view,main,manage,models,config}.py
+APP_DIRS=${templates,static}
+
+echo "####################################################
+Creating new env in $base_dir 
+####################################################"
+##Create new env if dont need, comment
+
+cd $base_dir
+virtualenv venv -p python3
+source venv/bin/activate
+
+echo "####################################################
+############ Start download packages ###############
+####################################################"
+pip3 install flask flask-sqlalchemy flask-bootstrap flask-script flask-wtf flask-admin 
+
+##Create basic configuration files set change if you whant
+
+mkdir app && cd app/
+mkdir {static,templates}
+touch {app,view,main,manage,models,config}.py
+
+if [ -e $FILES_SET ]; then 
+echo "####################################################
+################# Files was created  ##############
+####################################################";
+else
+echo " Something wrong!!! Check files "
+fi
+
+if [ -e $APP_DIRS ]; then
+echo "####################################################
+############ Directories was created  ##############
+####################################################";
+else
+echo " Something wrong!!! Check directories "
+fi
+
+echo "####################################################
+############          Done!           ##############
+####################################################";
+exit 0
+
+
